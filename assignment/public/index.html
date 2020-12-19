@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Smart light system</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/1d041253eb.js" crossorigin="anonymous"></script>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/8.2.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/8.2.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/8.2.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/8.2.1/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/8.2.1/firebase-functions.js"></script>
+    <script defer src="/__/firebase/8.2.1/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/8.2.1/firebase-storage.js"></script>
+    <script defer src="/__/firebase/8.2.1/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/8.2.1/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/8.2.1/firebase-performance.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+  </head>
+  <body>
+    <div class="background_login container-fluid ">
+      <div class="row mb-6" style="padding-top: 20px;">
+          <div class="col-md-4 col-sm-8 col-xs-12"></div>
+          <div class="col-md-4 col-sm-8 col-xs-12">
+            <form id="form_login" class="container-login-form set" style="width: 100%; height: 100%; margin-top: 60px;" >
+                <img src="img/house-diagram.jpg" alt="" style="width: 100%; height: 100%;">
+            </form>
+          </div>
+          <div class="col-md-4 col-sm-8 col-xs-12"></div>
+     </div>
+    
+    <div class="row mb-6" style="padding-top: 20px;">
+      <div class="col-md-4 col-sm-8 col-xs-12" style="margin:25px auto;width: 600px;">
+        <div class="container-login-form" style="margin-top: 100px; background-color:black;">
+          <div class="row  " style=" margin: 20px 10px ;color: white;">
+            <h5 class="" style="width: 60px; margin: auto 0;">LED1</h5>
+            <button  style="width: 50px;" id="btn_1">ON</button>
+
+            <label class="form-check-label " style="width: 100px; margin: auto 0;" for="flexCheckDefault">Automatic</label>
+            <input class="form-check-input " style="margin: auto 10px;"  type="checkbox" value="" id="check1">
+            <label class="form-check-label " style="width: 100px; margin: auto 0;" for="flexCheckDefault">Brightness</label>
+            <input type="number" onfocus="this.value=''" value="0" id="LED1" style="width: 90px; height: 20px; margin: auto 0;">
+            <button style="width: 50px;" id="btn_1_off">OFF</button>
+          </div>
+          <div class="row  " style=" margin: 20px 10px ;color: white;">
+            <h5 class="" style="width: 60px; margin: auto 0;">LED2</h5>
+            <button style="width: 50px;" id="btn_2">ON</button>
+
+            <label class="form-check-label " style="width: 100px; margin: auto 0;" for="flexCheckDefault">Automatic</label>
+            <input class="form-check-input " style="margin: auto 10px;" type="checkbox" value="" id="check2">
+            <label class="form-check-label " style="width: 100px; margin: auto 0;" for="flexCheckDefault">Brightness</label>
+            <input type="number" onfocus="this.value=''" value="0" id="LED2" style="width: 90px; height: 20px; margin: auto 0;">
+            <button style="width: 50px;" id="btn_2_off">OFF</button>
+          </div>
+            <div class="row  " style=" margin: 20px 10px ;color: white;">
+            <h5 class="" style="width: 60px; margin: auto 0;">LED3</h5>
+            <button style="width: 50px;" id="btn_3">ON</button>
+
+            <label class="form-check-label " style="width: 100px; margin: auto 0;" for="flexCheckDefault">Automatic</label>
+            <input class="form-check-input " style="margin: auto 10px;" type="checkbox" value="" id="check3">
+            <label class="form-check-label " style="width: 100px; margin: auto 0;" for="flexCheckDefault">Brightness</label>
+            <input type="number" onfocus="this.value=''" value="0" id="LED3" style="width: 90px; height: 20px; margin: auto 0;">
+            <button style="width: 50px;" id="btn_3_off">OFF</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      var firebaseConfig = {
+        apiKey: "AIzaSyDU59mlFEtQ389K1j3DcfmZN7C_wAa5hzI",
+        authDomain: "myapp-e3a2f.firebaseapp.com",
+        databaseURL: "https://myapp-e3a2f-default-rtdb.firebaseio.com",
+        projectId: "myapp-e3a2f",
+        storageBucket: "myapp-e3a2f.appspot.com",
+        messagingSenderId: "1097344287246",
+        appId: "1:1097344287246:web:d508bba36772627e8db25f",
+        measurementId: "G-QZHLMMNT6V"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+    <script>///////////////////////////////////////////////////// SET DATA ///////////////////////////////////////////////////////
+      document.getElementById("btn_1").onclick = function(){
+        var data = document.getElementById('LED1').value;
+        firebase.database().ref('led_1').set({
+          'value': data, 'status': 1
+        });
+      }
+      document.getElementById("btn_2").onclick = function(){
+        var data = document.getElementById('LED2').value;
+        firebase.database().ref('led_2').set({
+          'value': data, 'status': 1
+        });
+      }
+      document.getElementById("btn_3").onclick = function(){
+        var data = document.getElementById('LED3').value;
+        firebase.database().ref('led_3').set({
+          'value': data, 'status': 1
+        });
+      }
+    </script>
+    <script> /////////////////////////////////////////////////// AUTOMATIC MODE////////////////////////////////////////////////////
+      
+      var db = firebase.database().ref('LIGHT_SENSOR');
+      var human_detected = 0;
+      firebase.database().ref('PIR_SENSOR').on('value', (snapshot) => {
+        human_detected = snapshot.child('PIR_VALUE').val();
+        console.log(snapshot.child('PIR_VALUE').val())
+      });
+      db.on('value', (snapshot) => {
+        var light_value = snapshot.child('LIGHT_VALUE').val();
+        console.log(snapshot.val());
+        if(human_detected == 1)
+        {
+          if(document.getElementById('check1').checked)
+        {
+          document.getElementById('LED1').value = light_value;
+          var data = document.getElementById('LED1').value;
+          firebase.database().ref('led_1').set({
+          'value': data, 'status': 1
+        });
+        }
+        if(document.getElementById('check2').checked)
+        {
+          document.getElementById('LED2').value = light_value;
+          var data = document.getElementById('LED2').value;
+          firebase.database().ref('led_2').set({
+          'value': data, 'status': 1
+        });
+        }
+        if(document.getElementById('check3').checked)
+        {
+          document.getElementById('LED3').value = light_value;
+          var data = document.getElementById('LED3').value;
+        firebase.database().ref('led_3').set({
+          'value': data, 'status': 1
+        });
+        }
+      }
+      });
+    </script>
+    <script>////////////////////////////////////////////////// CHECK CHECKBOX //////////////////////////////////////
+        document.getElementById('check1').onclick = function(){
+        if(document.getElementById('check1').checked == true){
+          document.getElementById('LED1').disabled = true;
+        }
+        else{
+          document.getElementById('LED1').disabled = false;
+        }
+      };
+        document.getElementById('check2').onclick = function(){
+        if(document.getElementById('check2').checked == true){
+          document.getElementById('LED2').disabled = true;
+        }
+        else{
+          document.getElementById('LED2').disabled = false;
+        }
+      }
+        document.getElementById('check3').onclick = function(){
+        if(document.getElementById('check3').checked == true){
+          document.getElementById('LED3').disabled = true;
+        }
+        else{
+          document.getElementById('LED3').disabled = false;
+        }
+      }
+    </script>
+    <script>
+      document.getElementById('btn_1_off').onclick = function(){
+        firebase.database().ref('led_1').update({
+          'status': 0
+        });
+      }
+      document.getElementById('btn_2_off').onclick = function(){
+        firebase.database().ref('led_2').update({
+          'status': 0
+        });
+      }
+      document.getElementById('btn_3_off').onclick = function(){
+        firebase.database().ref('led_3').update({
+          'status': 0
+        });
+      }
+    </script>
+  </body>
+</html>

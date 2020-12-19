@@ -1,0 +1,47 @@
+.background_login{
+    width: 100%;
+    height: 100vh;
+    background: url("https://i.pinimg.com/originals/ab/b7/9a/abb79a18f2048bb73fb02f7eeccd4cba.jpg") no-repeat;
+    
+}
+.background_home{
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(blue, white);
+    
+}
+.searchbar{
+    border: black 1px solid;
+    width: 900;
+}
+.menu-font{
+    font: 2rem/1.5rem var(--font-family-sans-serif)
+}
+.setBorder{
+    border: black 1px solid;
+}
+.setBorder-bottom{
+    border-bottom: lightgray 1px solid;
+}
+.img-manual {
+    display: block;
+    max-width: 100%;
+    height: 100%;
+  }
+.overflow_visible{
+    overflow: visible;
+}
+.container-login-form{
+    -webkit-box-shadow: 0px 0px 48px 28px rgba(0,0,0,0.81);
+    -moz-box-shadow: 0px 0px 48px 28px rgba(0,0,0,0.81);
+    box-shadow: 0px 0px 48px 28px rgba(0,0,0,0.81);
+}
+.img-resize{
+    margin: 0 auto;
+    height: auto;
+    width: 60%;
+    min-height: 300px;
+}
+.controller{
+    margin-left: 20px
+}
